@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL-SHORTNER</title>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    background: rgb(37,247,255);
+background: linear-gradient(90deg, rgba(37,247,255,1) 0%, rgba(130,255,174,1) 47%, rgba(0,212,255,1) 100%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+form {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+}
+
+label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    align-self: flex-start;
+    margin-left: 10px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #ff6f61;
+}
+
+button {
+    background: linear-gradient(135deg, #ff6f61 0%, #ff927c 100%);
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #ff927c 0%, #ff6f61 100%);
+    transform: translateY(-2px);
+}
+
+p {
+    color: #fff;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+p a {
+    color: #ff6f61;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#result {
+    background: rgba(148, 234, 143, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+footer p {
+    margin: 0;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+footer p a {
+    color: #ff6f61;
+    text-decoration: none;
+}
+
+footer p a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+    <h1>URL_SHORTNER</h1> 
+    <% if (locals.id) { %>
+        <p id="result">
+            URL Generated: <a href="http://localhost:8001/<%= id %>" target="_blank">http://localhost:8001/<%= id %></a>
+        </p>
+    <% } %>
+    <div >
+        <form method="post" action="/url">
+            <label>Enter your URL</label>
+            <input type="text" name="url" placeholder="http://example.com"> 
+            <button type="submit">Generate</button>
+        </form>
+    </div>   
+    <footer>
+        <p>Developed by Omkar Kale</p>
+    </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const input = document.querySelector('input[type="text"]');
+        const button = document.querySelector('button');
+        const result = document.querySelector('p');
+    
+        // Animate form on load
+        form.style.opacity = '0';
+        form.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            form.style.transition = 'opacity 0.5s, transform 0.5s';
+            form.style.opacity = '1';
+            form.style.transform = 'translateY(0)';
+        }, 200);
+    
+        // Focus input on load
+        input.focus();
+    
+        // Button click effect
+        button.addEventListener('click', function() {
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+        });
+    
+        // Animate result appearance
+        if (result) {
+            result.style.opacity = '0';
+            result.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+                result.style.transition = 'opacity 0.5s, transform 0.5s';
+                result.style.opacity = '1';
+                result.style.transform = 'translateY(0)';
+            }, 500);
+        }
+    });
+    </script>
+</body>
+</html>

@@ -11,8 +11,7 @@ async function handlegenerateshorturl(req,res){
         redirecturl: body.url,
         visitedhistory: []
     })
-    return res.json({ id : shortId})
-
+    return res.render("home" , { id : shortId});
 }
 
 async function handlegetanalytical(req,res) {
@@ -21,8 +20,13 @@ async function handlegetanalytical(req,res) {
     return res.json({ totalclicks : result.visithistory.length , analytics :result.visithistory})
 }
 
+async function handlegethomepage(req,res) {
+    return res.render("home");
+}
+
 module.exports = {
     handlegenerateshorturl,
-    handlegetanalytical
+    handlegetanalytical,
+    handlegethomepage
 
 }
